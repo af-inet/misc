@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+# a template for writing python programs
+# includes:
+#     main.py
+#     requirements.txt
+#     README.md
+#
+
+cat > main.py << EOF
+#!/usr/bin/env python
+import argparse
+
+def parse_args():
+    """ Parses arguments. """
+    parser = argparse.ArgumentParser(
+        description='A description of your program.')
+    parser.add_argument('src',
+        action='store',
+        type=str,
+        nargs='?',
+        default='-',
+        help='file to read data from')
+    parser.add_argument('dest',
+        action='store',
+        type=str,
+        nargs='?',
+        default='-',
+        help='file to write data to')
+    return parser.parse_args()
+
+def main():
+    args = parse_args()
+    print(args)
+
+if __name__ == '__main__':
+    main()
+EOF
+
+chmod +x main.py
+
+touch requirements.txt
+
+cat > README.md << EOF
+# setup
+virtualenv env
+. env/bin/activate
+pip install -r requirements.txt
+EOF
+
